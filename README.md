@@ -1,8 +1,7 @@
-# amazon_scraper
+# Amazon Review Scraper
 
-##haven't you always wanted to get reviews from amazon easily? now you can!
-
-this will export reviews into s CSV, and get title, rating, date, author, and text of each review
+#### haven't you always wanted to get reviews from amazon easily? now you can! 
+#### this script will export reviews into a CSV file. it'll scrape the title, rating, date, author, and text of each review.
 
 
 ##### Set Up
