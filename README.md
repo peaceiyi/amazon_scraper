@@ -20,4 +20,4 @@ example - https://www.amazon.com/Alienware-Gaming-Mechanical-Keyboard-AW768/prod
 ##### THINGS TO FIX
 - sometimes crashes with items with a ton of pages
 - sometimes the find_all won't work because Nonetype is returned
--let the user input the URL of the product page!
+- ~~let the user input the URL of the product page!~~
