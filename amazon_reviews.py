@@ -9,9 +9,31 @@ import requests
 
 
 
-def review_pages(top_page_url):
+def review_pages(product_page):
     pagination_items = []
     review_urls = []
+
+
+    site = "http://amazon.com"
+    headers = {
+    'User-Agent':'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.71 Safari/537.36'
+    }
+
+    #get product page request
+    product_page = requests.get(product_page, headers = headers)
+
+    #product page html
+    product_soup = BeautifulSoup(product_page.text, "html.parser")
+
+
+    #get the review link
+    for all_review_url in product_soup.find_all("a", {"data-hook":"see-all-reviews-link"}):
+        print (all_review_url.get("href"))
+        top_page_url = site + all_review_url.get("href")  #LINK FOR ALL REVIEWS
+        print (top_page_url)
+
+
+    #this section gets all review URLS
     base_url = top_page_url.replace("ref=cm_cr_dp_d_show_all_top?ie=UTF8&reviewerType=all_reviews","")
     review_page_string = "ref=cm_cr_arp_d_paging_btm_2?ie=UTF8&reviewerType=all_reviews&pageNumber=" #page number is missing!
 
@@ -49,9 +71,13 @@ def get_reviews(pageurl):
     page_number = 1
     review_number = 0
 
+    headers = {
+    'User-Agent':'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.71 Safari/537.36'
+    }
+
     for url in pageurl:
         print("scraping page #"+str(page_number))
-        url_page = requests.get(url)
+        url_page = requests.get(url, headers = headers)
         url_soup = BeautifulSoup(url_page.text, "html.parser")
         url_reviews = url_soup.find("div", {"class": "a-section a-spacing-none review-views celwidget"}, {"id":"cm_cr-review_list"}) #review div
 
@@ -96,7 +122,7 @@ def main():
     headers = ["title", "author", "date", "rating", "text"]
 
     print("What product do you want the reviews for?")
-    review_url = input("Please paste the top level review page of the product. \n")
+    review_url = input("Please paste the product page url. \n")
 
     print("The following reviews will be exported to a .csv file.")
     filename = input("What do you want to name file? \n")
