@@ -8,7 +8,8 @@ import csv
 import requests
 
 
-
+#input product page url
+#this function will output all the review urls for you
 def review_pages(product_page):
     pagination_items = []
     review_urls = []
@@ -64,7 +65,7 @@ def review_pages(product_page):
     return review_urls
 
 #input the list of reviews!
-
+#this will output a list of tuples of a products reviews
 def get_reviews(pageurl):
     #this function will make tuples of every review, and store all tuples in the review list
     reviews = []
@@ -118,6 +119,8 @@ def get_reviews(pageurl):
 
     return reviews
 
+#main function
+#required - input URL & filename
 def main():
     headers = ["title", "author", "date", "rating", "text"]
 
@@ -149,7 +152,6 @@ def main():
         reviewcsv.write(review[len(review)-1]+"\n")
 
     reviewcsv.close()
-
 
 if __name__ == '__main__':
     main()
