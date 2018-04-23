@@ -4,12 +4,12 @@
 #### this script will export reviews into a CSV file. it'll scrape the title, rating, date, author, and text of each review.
 
 
-##### Set Up
+#### Set Up
 
-all you need to start is the URL of the first page of reviews. Make sure the end of the URL says reviewerType=all_reviews
-
-example - https://www.amazon.com/Alienware-Gaming-Mechanical-Keyboard-AW768/product-reviews/B072NHMYXX/ref=cm_cr_dp_d_show_all_top?ie=UTF8&reviewerType=all_reviews
-
+##### Necessary Modules
+- Requests
+- BeautifulSoup
+- Product Page URL 
 
 ##### Running the Script
 - Open terminal
