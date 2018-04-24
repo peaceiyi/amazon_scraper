@@ -10,6 +10,14 @@ import requests
 
 #input product page url
 #this function will output all the review urls for you
+
+def cleanstring(review_text):
+	if "," in review_text: #letter in string
+		review_text = review_text.replace(",","")
+
+	return review_text
+
+
 def review_pages(product_page):
     pagination_items = []
     review_urls = []
@@ -52,7 +60,7 @@ def review_pages(product_page):
     #review urls
     review_urls.append(top_page_url) #first item in the list, top level review page
 
-    if "," in pagination_items[6]: #get rid of commas in the number
+    if "," in pagination_items[6]: #get rid of commas #only matters if pages > 999
         pagination_items[6] = pagination_items[6].replace(",","")
     print(("Number of review pages: " + str(pagination_items[6]))) #number of pages with reviews
 
@@ -144,12 +152,16 @@ def main():
 
     for i in range(len(headers)-1):
         reviewcsv.write(headers[i]+",")
-    reviewcsv.write(headers[len(headers)-1]+"\n")
+    reviewcsv.write((headers[len(headers)-1])+"\n")
 
     for review in product_reviews:
+        #print("********************************")
         for i in range(len(review)-1):
-            reviewcsv.write(review[i]+",")
-        reviewcsv.write(review[len(review)-1]+"\n")
+            #print(review[i])
+            reviewcsv.write(cleanstring(str(review[i]))+",")
+        reviewcsv.write(cleanstring(str(review[len(review)-1]))+"\n")
+        #print(str(review[len(review)-1]))
+        #print("********************************")
 
     reviewcsv.close()
 
